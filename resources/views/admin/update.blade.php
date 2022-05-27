@@ -64,7 +64,7 @@
                   <select name="specialite" id="specialite" class="form-control form-select">
                       <option value="{{$user->specialite}}">{{$user->specialite}}</option>
                       @foreach ($specialite as $item)
-                      <option value="{{$item->abr}}">{{$item->abr}}</option>
+                      <option value="{{$item->specialite}}">{{$item->specialite}}</option>
                       @endforeach
 
                   </select>

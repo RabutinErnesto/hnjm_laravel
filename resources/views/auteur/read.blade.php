@@ -23,11 +23,7 @@
                 <table class="table datatable">
                     <thead>
                         <tr>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Prenom</th>
-
-                            <th scope="col">Telephone</th>
+                            <th scope="col">Nom et Prenom</th>
                             <th scope="col">specialite</th>
                             <th scope="col">Actions</th>
                           </tr>
@@ -35,11 +31,8 @@
                         <tbody>
                             @foreach ($auteur as $item)
                             <tr>
-                              <th>{{$item->titre}}</th>
-                              <td>{{$item->nom}}</td>
-                              <td>{{$item->prenom}}</td>
-                              <td>{{$item->tel}}</td>
-                              <td>{{$item->specialite}}</td>
+                              <td>{{ $item->titre}}  {{$item->nom}} {{$item->prenom}}</td>
+                              <td>{{$item->idSpecialite}}</td>
                               <td><a href="{{route('auteur.edit', $item->id)}}" class="btn btn-success">
                                   <i class="bi bi-pen"></i>
                               </a>

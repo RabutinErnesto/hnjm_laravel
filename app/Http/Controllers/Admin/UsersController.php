@@ -51,6 +51,7 @@ class UsersController extends Controller
         $images=$request->images;
         $filename=$images->getClientOriginalName();
         $request->images->move('back/photo_user',$filename);
+
         $user->images=$filename;
         $user->titre = $request->titre;
         $user->specialite = $request->specialite;
@@ -105,6 +106,10 @@ class UsersController extends Controller
         $images=$request->images;
         $filename=$images->getClientOriginalName();
         $request->images->move('back/photo_user',$filename);
+        if(!empty($images)){
+            $filename=$this->username.$this->uploadDir.$images->getClientOriginalName();
+        }
+
         $user->images=$filename;
         $user->titre = $request->titre;
         $user->specialite = $request->specialite;

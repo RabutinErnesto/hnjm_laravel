@@ -41,7 +41,7 @@
 
                 <div class="col-12">
                   <label for="yourEmail" class="form-label">Email</label>
-                  <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" required autocomplete="email">
+                  <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="email">
                   @error('email')
                   <div class="invalid-feedback"  role="alert">
                         <strong>{{ $message }}</strong>
@@ -52,8 +52,13 @@
                 <div class="col-12">
                     <label for="tel" class="form-label">Telephone</label>
                     <div class="input-group has-validation">
-                      <input type="text" name="tel" class="form-control" id="tel" required>
+                      <input type="text" name="tel" class="form-control @error('tel') is-invalid @enderror" id="tel" >
                       <div class="invalid-feedback">Entrez votre tel .</div>
+                      @error('tel')
+                      <div class="invalid-feedback"  role="alert">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @enderror
                     </div>
                   </div>
                 <div class="col-12">

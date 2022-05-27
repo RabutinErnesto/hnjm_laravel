@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+  <title>HNJM | Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+  <link rel="shortcut icon" href="{{ asset('front/img/logo.png') }}" type="image/x-icon">
   <!-- Vendor CSS Files -->
   <link href="{{asset('back/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('back/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
@@ -31,6 +31,11 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
+ <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -82,7 +87,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="back/photo_user/{{ Auth::user()->images }}"  class="rounded-circle" >
+            <img src="../../back/photo_user/{{ Auth::user()->images }}"  class="rounded-circle" >
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->nom }}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -166,6 +171,13 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('congre.index')}}">
+          <i class="bi bi-receipt"></i>
+          <span>Congre</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('discipline.index')}}">
           <i class="bi bi-slash-circle"></i>
           <span>Discipline</span>
@@ -224,7 +236,7 @@
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>Admin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>ErnestoRabutin</span></strong>. All Rights Reserved
     </div>
   </footer><!-- End Footer -->
 
