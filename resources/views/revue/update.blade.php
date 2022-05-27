@@ -38,22 +38,23 @@
 
                   <div class="col-12">
                     <label  class="form-label">Nombre Page</label>
-                    <input type="number" name="nbrPage" value="{{$revue->nbrPage}}"  class="form-control" id="nbrPage" min="1" max="100" required>
+                    <input type="number" name="nbrPage" value="{{$revue->nbrePage}}"  class="form-control" id="nbrPage" min="1" max="100" required>
                     <div class="invalid-feedback">Tapez le nbrPage!</div>
                   </div>
                   <div class="col-12">
                     <label for="discipline" class="form-label">Discipline</label>
                   <select name="discipline" id="discipline" class="form-control form-select">
-                      <option value="{{$revue->discipline}}" >{{$revue->discipline}}</option>
+                      <option value="{{$revue->idDiscipline}}" >{{$revue->discipline}}</option>
                       @foreach ($discipline as $item)
-                      <option value="{{$item->discipline}}">{{$item->discipline}}</option>
+                      <option value="{{$item->idDiscipline}}">{{$item->discipline}}</option>
                       @endforeach
                   </select>
                   </div>
                   <div class="col-12">
                     <label for="auteur" class="form-label">Auteur Principal</label>
-                  <select name="auteurPrincipal" id="auteur" class="form-control form-select">
-                      <option value="{{$revue->auteurPrincipal}}">{{$revue->auteurPrincipal}}</option>
+                  <select name="auteurPrincipal" id="auteur" class="form-control form-select" >
+
+                      <option value="{{$revue->idAuteur}}">{{ $revue->idAuteur }}</option>
                       @foreach ($auteur as $item)
                       <option value="{{$item->nom}} {{$item->prenom}}">{{$item->nom}} {{$item->prenom}}</option>
                       @endforeach
@@ -62,13 +63,12 @@
 
                   <div class="col-12">
                     <label for="AutreAuteur" class="form-label">Autre Auteurs</label>
-                  <select name="autreAuteurs" id="auteur" class="form-control form-select">
+                  <select name="autreAuteurs" id="autre-auteur" id="multiple" class="form-control select2" multiple>
                       <option value="{{$revue->autreAuteurs}}">{{$revue->autreAuteurs}}</option>
-                      @foreach ($auteur as $item)
-                      <option value="{{$item->nom}} {{$item->prenom}}">{{$item->nom}} {{$item->prenom}}</option>
-                      @endforeach
+
                   </select>
                   </div>
+
                   <div class="col-12">
                     <label for="fichier" class="form-label">Fichier</label>
                     <div class="input-group has-validation">
@@ -99,7 +99,16 @@
     </section>
 
   </main><!-- End #main -->
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('.select2').select2({
+        closeOnSelect: false
+        });
+    });
+  </script>
 @endsection
 
 

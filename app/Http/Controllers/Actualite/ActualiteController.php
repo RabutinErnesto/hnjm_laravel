@@ -13,6 +13,12 @@ class ActualiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function actualiteview(){
+        $actualite = Actualite::all();
+        return view('actualite.actualite',[
+            'actualite'=>$actualite
+        ]);
+    }
     public function index()
     {
         $actualite = Actualite::all();

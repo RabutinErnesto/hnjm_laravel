@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auteur;
 
 use App\Auteur;
 use App\Http\Controllers\Controller;
+use App\Revue;
 use Illuminate\Http\Request;
 use App\Specialite;
 use App\Titre;
+use Illuminate\Support\Facades\DB;
 
 class AuteurController extends Controller
 {
@@ -19,7 +21,7 @@ class AuteurController extends Controller
     {
         $auteur = Auteur::all();
         return view('auteur.read',[
-            'auteur'=>$auteur,
+            'auteur'=>$auteur
         ]);
     }
 
@@ -30,7 +32,6 @@ class AuteurController extends Controller
      */
     public function create()
     {
-
         $titre = Titre::all();
         $specialite = Specialite::all();
         return view('auteur.create',[
@@ -48,11 +49,11 @@ class AuteurController extends Controller
     public function store(Request $request, Auteur $auteur)
     {
         $auteur = new auteur;
-        $auteur->titre = $request->titre;
+        $auteur->idTitre = $request->titre;
         $auteur->nom = $request->nom;
         $auteur->prenom = $request->prenom;
-        $auteur->tel = $request->tel;
-        $auteur->specialite = $request->specialite;
+        $auteur->phone = $request->tel;
+        $auteur->idSpecialite = $request->specialite;
         $auteur->email = $request->email;
         $auteur->save();
         return redirect()->route('auteur.index');
@@ -64,9 +65,9 @@ class AuteurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Auteur $auteur)
     {
-        //
+
     }
 
     /**

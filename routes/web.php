@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('acceuil','AcceuilController@index')->name('acceuil');
 
 Auth::routes();
 
@@ -35,6 +36,7 @@ Route::namespace('Actualite')->group(function()
 {
     Route::resource('actualite', 'ActualiteController');
 });
+Route::get('actualiteview','Actualite\ActualiteController@actualiteview')->name('actualiteview');
 Route::namespace('Article')->group(function()
 {
     Route::resource('article', 'ArticleController');
@@ -63,4 +65,19 @@ Route::namespace('Specialite')->group(function()
 Route::namespace('revue')->group(function()
 {
     Route::resource('revue', 'revueController');
+});
+
+Route::namespace('Congre')->group(function()
+{
+    Route::resource('congre', 'CongreController');
+});
+Route::get('/programcongre','Congre\CongreController@programcongre')->name('programcongre');
+Route::get('/resumecongre','Congre\CongreController@resumecongre')->name('resumecongre');
+Route::get('/instr','AcceuilController@instr')->name('instr');
+Route::get('/archive','AcceuilController@archive')->name('archive');
+Route::get('/articleview','Revue\RevueController@article')->name('articleview');
+Route::get('/comite','AcceuilController@comite')->name('comite');
+Route::get('/viewthese','These\TheseController@viewthese')->name('viewthese');
+Route::namespace('Photo')->group(function(){
+    Route::resource('photo','PhotoController');
 });

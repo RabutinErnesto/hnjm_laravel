@@ -15,7 +15,7 @@
             <div class="card-body">
               <h5 class="card-title">Ajouter</h5>
 
-              <form class="row g-3 needs-validation" action="{{route('revue.store')}}" method="POST">
+              <form class="row g-3 needs-validation" id="form-revue" action="{{route('revue.store')}}" method="POST">
                 @csrf
                 <div class="col-12">
                   <label  class="form-label">Titre</label>
@@ -45,7 +45,7 @@
                   <select name="discipline" id="discipline" class="form-control form-select">
                       <option value="">choisir</option>
                       @foreach ($discipline as $item)
-                      <option value="{{$item->discipline}}">{{$item->discipline}}</option>
+                      <option value="{{$item->id}}">{{$item->discipline}}</option>
                       @endforeach
                   </select>
                   </div>
@@ -54,19 +54,17 @@
                   <select name="auteurPrincipal" id="auteur" class="form-control form-select">
                       <option value="">choisir</option>
                       @foreach ($auteur as $item)
-                      <option value="{{$item->nom}} {{$item->prenom}}">{{$item->nom}} {{$item->prenom}}</option>
+                      <option value="{{$item->id}}">{{$item->nom}} {{$item->prenom}}</option>
                       @endforeach
                   </select>
                   </div>
-
                   <div class="col-12">
                     <label for="AutreAuteur" class="form-label">Autre Auteurs</label>
-                  <select name="autreAuteurs" id="autreAuteur" class="form-control form-select">
-                      <option value="">choisir</option>
-                      @foreach ($auteur as $item)
-                      <option value="{{$item->nom}} {{$item->prenom}}">{{$item->nom}} {{$item->prenom}}</option>
-                      @endforeach
-                  </select>
+                    <select name="autreAuteur" class="form-control select2" id="multiple" tabindex="-1" data-mdb-placeholder="Autre Auteurs" data-live-search="true" multiple="multiple">
+                        @foreach ($auteur as $item)
+                        <option value="{{$item->id}}">{{$item->nom}} {{$item->prenom}}</option>
+                        @endforeach
+                      </select>
                   </div>
                   <div class="col-12">
                     <label for="fichier" class="form-label">Fichier</label>
@@ -87,19 +85,26 @@
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form><!-- Vertical Form -->
-
             </div>
           </div>
-
-
-
         </div>
       </div>
     </section>
 
   </main><!-- End #main -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        // Select2 Multiple
+        $('.select2').select2({
+            placeholder: "Select Auteurs",
+            allowClear: true
+        });
 
+    });
+
+</script>
 @endsection
-
-
-

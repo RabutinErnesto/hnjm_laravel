@@ -17,10 +17,10 @@ class CreateAuteursTable extends Migration
             $table->id();
             $table->string('titre');
             $table->string('nom');
-            $table->string('prenom');
-            $table->string('email')->unique();
+            $table->string('prenom')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('tel')->unique();
+            $table->string('tel')->unique()->nullable();
             $table->string('specialite');
             $table->string('images')->nullable();
             $table->timestamps();
