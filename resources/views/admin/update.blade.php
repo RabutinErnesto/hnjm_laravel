@@ -21,7 +21,7 @@
                 <div class="col-12">
                     <label for="titre" class="form-label">Titre</label>
                   <select name="titre" id="titre" class="form-control form-select">
-                      <option value="{{$user->titre}}">{{$user->titre}}</option>
+                      <option value="{{$user->titre_id}}">{{implode($user->titre()->get()->pluck('abr')->toArray())}}</option>
                       @foreach ($titre as $item)
                       <option value="{{$item->abr}}">{{$item->abr}}</option>
                       @endforeach
@@ -46,9 +46,15 @@
                 </div>
 
                 <div class="col-12">
+                  <label for="yourEmail" class="form-label">Password</label>
+                  <input type="text" name="password" class="form-control" id="email" placeholder="nouveau mdp">
+                  <div class="invalid-feedback">Veuillez saisir une adresse e-mail valide !</div>
+                </div>
+
+                <div class="col-12">
                   <label for="matricule" class="form-label">Matricule</label>
                   <div class="input-group has-validation">
-                    <input type="text" name="matricule" class="form-control" id="matricule" value="{{$user->matricule}}" required>
+                    <input type="text" name="matricule" class="form-control" id="matricule" value="{{$user->matricule}}">
                     <div class="invalid-feedback">Entrez votre matricule .</div>
                   </div>
                 </div>
@@ -62,7 +68,7 @@
                 <div class="col-12">
                     <label for="specialite" class="form-label">Specialite</label>
                   <select name="specialite" id="specialite" class="form-control form-select">
-                      <option value="{{$user->specialite}}">{{$user->specialite}}</option>
+                      <option value="{{$user->specialite_id}}">{{implode($user->specialite()->get()->pluck('specialite')->toArray())}}</option>
                       @foreach ($specialite as $item)
                       <option value="{{$item->specialite}}">{{$item->specialite}}</option>
                       @endforeach
@@ -79,6 +85,7 @@
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
+
                 </div>
               </form><!-- Vertical Form -->
 

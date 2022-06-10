@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Photo;
 
 use App\Http\Controllers\Controller;
+use App\Photo;
+use App\Auteur;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
@@ -14,7 +16,13 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        return view('photo.read');
+        $photo = Photo::all();
+        return view('photo.read',['photo'=>$photo]);
+    }
+    public function photo()
+    {
+        $photo = Photo::all();
+        return view('photo.view',['photo'=>$photo]);
     }
 
     /**
@@ -24,7 +32,10 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        $auteur = Auteur::all();
+        return view('photo.create',[
+            'auteur'=>$auteur
+        ]);
     }
 
     /**
@@ -35,7 +46,13 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['
+        photo'=>'required|image|mimes:png,jpg']);
+        $photo = new Photo();
+        $photo->commentaire = $request->commentaire;
+        $photo->auteur_id = $request->auteur;
+        $photo->save();
+        return redirect()->route('photo.index');
     }
 
     /**

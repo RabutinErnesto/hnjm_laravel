@@ -27,18 +27,18 @@
                 <div class="col-12">
                     <label for="discipline" class="form-label">discipline</label>
                   <select name="discipline" id="discipline" class="form-control form-select">
-                      <option value="{{$these->discipline}}">{{$these->discipline}}</option>
+                      <option value="{{$these->discipline_id}}">{{implode($these->discipline()->get()->pluck('discipline')->toArray())}}</option>
                       @foreach ($discipline as $item)
-                      <option value="{{$item->discipline}}">{{$item->discipline}}</option>
+                      <option value="{{$item->id}}">{{$item->discipline}}</option>
                       @endforeach
                   </select>
                   </div>
                   <div class="col-12">
                     <label for="auteur" class="form-label">auteur</label>
                   <select name="auteur" id="auteur" class="form-control form-select">
-                      <option value="{{$these->auteur}}">{{$these->auteur}}</option>
+                      <option value="{{$these->auteur_id}}">{{implode($these->auteur()->get()->pluck('nom')->toArray())}}  {{implode($these->auteur()->get()->pluck('prenom')->toArray())}}</option>
                       @foreach ($auteur as $item)
-                      <option value="{{$item->nom}} {{$item->prenom}}">{{$item->nom}} {{$item->prenom}}</option>
+                      <option value="{{ $item->id }}">{{$item->nom}} {{$item->prenom}}</option>
                       @endforeach
                   </select>
                   </div>

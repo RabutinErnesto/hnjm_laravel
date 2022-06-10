@@ -27,13 +27,18 @@
                   <select name="auteur" id="auteur" class="form-control form-select">
                       <option value="">choisir</option>
                       @foreach ($auteur as $item)
-                      <option value="{{$item->nom}} {{$item->prenom}}">{{$item->nom}} {{$item->prenom}}</option>
+                      <option value="{{$item->id}} ">{{$item->nom}} {{$item->prenom}}</option>
                       @endforeach
                   </select>
                 </div>
                 <div class="col-12">
                     <label  class="form-label">Date du congre</label>
                     <input type="date" name="date" class="form-control" id="congre"  required>
+                    <div class="invalid-feedback">Tapez le congre!</div>
+                  </div>
+                  <div class="col-12">
+                    <label  class="form-label">Fichier</label>
+                    <input type="file" name="fichier" class="form-control" id="congre">
                     <div class="invalid-feedback">Tapez le congre!</div>
                   </div>
                 <div class="col-12">

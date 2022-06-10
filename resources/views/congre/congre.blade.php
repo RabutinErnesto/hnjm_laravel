@@ -17,7 +17,7 @@
                           <h4><a href="{{ route('congre.show', $item) }}">{{ $item->titre }}</a></h4>
                           <div class="d-flex align-items-center pt-5 mt-auto">
                             <div>
-                                <p  class="text-default" name="a">{{ $item->auteur }}</p>
+                                <p  class="text-default" name="a">{{ implode($item->auteur()->get()->pluck('nom')->toArray()) }} {{ implode($item->auteur()->get()->pluck('prenom')->toArray()) }}</p>
 
                             </div>
 

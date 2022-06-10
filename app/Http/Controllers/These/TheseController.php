@@ -7,6 +7,7 @@ use App\These_et_Memoire;
 use Illuminate\Http\Request;
 use App\Auteur;
 use App\Discipline;
+use Illuminate\Support\Facades\Auth;
 
 class TheseController extends Controller
 {
@@ -50,13 +51,11 @@ class TheseController extends Controller
     public function store(Request $request)
     {
         $these = new These_et_Memoire();
-        $fichier=$request->fichier;
-        $filename=$fichier->getClientOriginalName();
-        $request->fichier->move('back/these_fichier',$filename);
-        $these->fichier=$filename;
+        $these->fichier= $request->fichier;
         $these->titre = $request->titre;
-        $these->discipline = $request->discipline;
-        $these->auteur = $request->auteur;
+        $these->discipline_id = $request->discipline;
+        $these->auteur_id = $request->auteur;
+        $these->userCreated = Auth::user()->id;
         $these->save();
         return redirect()->route('these.index');
     }

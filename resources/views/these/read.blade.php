@@ -31,7 +31,7 @@
                         @foreach ($these as $item)
                           <tr>
                             <td>{{$item->titre}}</td>
-                            <td>{{$item->auteur}}</td>
+                            <td>{{implode($item->auteur()->get()->pluck('nom')->toArray())}}  {{implode($item->auteur()->get()->pluck('prenom')->toArray())}}</td>
                             <td><a href="{{route('these.edit', $item->id)}}" class="btn btn-success">
                                 <i class="bi bi-pen"></i>
                             </a>

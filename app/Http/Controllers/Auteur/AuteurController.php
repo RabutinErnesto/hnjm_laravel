@@ -8,7 +8,7 @@ use App\Revue;
 use Illuminate\Http\Request;
 use App\Specialite;
 use App\Titre;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AuteurController extends Controller
 {
@@ -19,9 +19,11 @@ class AuteurController extends Controller
      */
     public function index()
     {
+        $specialite = Specialite::all();
         $auteur = Auteur::all();
         return view('auteur.read',[
-            'auteur'=>$auteur
+            'auteur'=>$auteur,
+            'specialite'=>$specialite
         ]);
     }
 
@@ -49,12 +51,14 @@ class AuteurController extends Controller
     public function store(Request $request, Auteur $auteur)
     {
         $auteur = new auteur;
-        $auteur->idTitre = $request->titre;
+        $auteur->titre_id = $request->titre;
         $auteur->nom = $request->nom;
         $auteur->prenom = $request->prenom;
         $auteur->phone = $request->tel;
-        $auteur->idSpecialite = $request->specialite;
+        $auteur->specialite_id = $request->specialite;
         $auteur->email = $request->email;
+        $auteur->photo = $request->images;
+        $auteur->userCreated = Auth::user()->id;
         $auteur->save();
         return redirect()->route('auteur.index');
     }
@@ -96,17 +100,12 @@ class AuteurController extends Controller
      */
     public function update(Request $request, Auteur $auteur)
     {
-        $images=$request->images;
-        $filename=$images->getClientOriginalName();
-        $request->images->move('back/photo_auteur',$filename);
-        $auteur->images=$filename;
-        $auteur->titre = $request->titre;
-        $auteur->specialite = $request->specialite;
+
+        $auteur->idTitre = $request->titre;
         $auteur->nom = $request->nom;
         $auteur->prenom = $request->prenom;
-        $auteur->tel = $request->tel;
-        $auteur->titre = $request->titre;
-        $auteur->specialite = $request->specialite;
+        $auteur->phone = $request->tel;
+        $auteur->idSpecialite = $request->specialite;
         $auteur->email = $request->email;
         $auteur->save();
         return redirect()->route('auteur.index');
@@ -118,8 +117,9 @@ class AuteurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Auteur $auteur)
     {
-        //
+        $auteur->delete();
+        return redirect()->route('auteur.index');
     }
 }

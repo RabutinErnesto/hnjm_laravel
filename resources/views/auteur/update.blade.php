@@ -21,7 +21,8 @@
                 <div class="col-12">
                     <label for="titre" class="form-label">Titre</label>
                   <select name="titre" id="titre" class="form-control form-select">
-                      <option value="{{$auteur->titre}}">{{$auteur->titre}}</option>
+
+                      <option value="{{$auteur->titre_id}}">{{implode($auteur->titre()->get()->pluck('abr')->toArray())}}</option>
                       @foreach ($titre as $item)
                       <option value="{{$item->abr}}">{{$item->abr}}</option>
                       @endforeach
@@ -46,23 +47,16 @@
                 </div>
 
                 <div class="col-12">
-                  <label for="matricule" class="form-label">Matricule</label>
-                  <div class="input-group has-validation">
-                    <input type="text" name="matricule" class="form-control" id="matricule" value="{{$auteur->matricule}}" required>
-                    <div class="invalid-feedback">Entrez votre matricule .</div>
-                  </div>
-                </div>
-                <div class="col-12">
                     <label for="tel" class="form-label">Telephone</label>
                     <div class="input-group has-validation">
-                      <input type="text" name="tel" class="form-control" id="tel" value="{{$auteur->tel}}" required>
+                      <input type="text" name="tel" class="form-control" id="tel" value="{{$auteur->phone}}" required>
                       <div class="invalid-feedback">Entrez votre tel .</div>
                     </div>
                   </div>
                 <div class="col-12">
                     <label for="specialite" class="form-label">Specialite</label>
                   <select name="specialite" id="specialite" class="form-control form-select">
-                      <option value="{{$auteur->specialite}}">{{$auteur->specialite}}</option>
+                      <option value="{{$auteur->specialite_id}}">{{implode(',', $auteur->specialite()->get()->pluck('abr')->toArray())}}</option>
                       @foreach ($specialite as $item)
                       <option value="{{$item->abr}}">{{$item->abr}}</option>
                       @endforeach

@@ -10,7 +10,8 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-body ">
-                        <a href=""><span>{!! $congre->auteur !!}</span></a>
+                        <a href=""><span>{!! implode($congre->auteur()->get()->pluck('nom')->toArray()) !!}
+                            {!! implode($congre->auteur()->get()->pluck('prenom')->toArray()) !!}</span></a>
                         <div style="padding-top: 5%"> {!! $congre->contenue !!}</div>
                     </div>
                 </div>

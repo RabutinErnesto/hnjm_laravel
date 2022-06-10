@@ -26,8 +26,7 @@
                           <th scope="col">Nom</th>
                           <th scope="col">Prenom</th>
                           <th scope="col">matricule</th>
-
-                          <th scope="col">Telephone</th>
+                          <th scope="col">Email</th>
                           <th scope="col">specialite</th>
                           <th scope="col">Actions</th>
                         </tr>
@@ -35,12 +34,12 @@
                       <tbody>
                           @foreach ($user as $item)
                           <tr>
-                            <th>{{$item->titre}}</th>
+                            <th>{{implode($item->titre()->get()->pluck('abr')->toArray())}}</th>
                             <td>{{$item->nom}}</td>
                             <td>{{$item->prenom}}</td>
                             <td>{{$item->matricule}}</td>
-                            <td>{{$item->tel}}</td>
-                            <td>{{$item->specialite}}</td>
+                            <td>{{$item->email}}</td>
+                            <td>{{implode($item->specialite()->get()->pluck('specialite')->toArray())}}</td>
                             <td><a href="{{route('users.edit', $item->id)}}" class="btn btn-success">
                                 <i class="bi bi-pen"></i>
                             </a>

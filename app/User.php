@@ -18,6 +18,7 @@ class User extends Authenticatable
     protected $fillable = [
         'nom',  'prenom',  'matricule', 'tel','email', 'password',
     ];
+    protected $table = 'users';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -36,4 +37,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function titre(){
+        return $this->belongsTo('App\Titre');
+    }
+    public function specialite(){
+        return $this->belongsTo('App\Specialite');
+    }
 }
