@@ -22,7 +22,10 @@ class TheseController extends Controller
             'these'=>$these,
         ]);
     }
-
+    public function viewthese(){
+        $these = These_et_Memoire::all();
+        return view('these.viewthese',['these'=>$these]);
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -7,6 +7,8 @@ use App\Revue;
 use Illuminate\Http\Request;
 use App\Auteur;
 use App\Discipline;
+use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\DB;
 
 class RevueController extends Controller
 {
@@ -46,16 +48,17 @@ class RevueController extends Controller
      */
     public function store(Request $request)
     {
-        $revue = new Revue;
-        $revue->titre = $request->titre;
-        $revue->volume = $request->volume;
-        $revue->issue = $request->issue;
-        $revue->nbrPage = $request->nbrPage;
-        $revue->discipline = $request->discipline;
-        $revue->auteurPrincipal = $request->auteurPrincipal;
-        $revue->autreAuteurs = $request->autreAuteurs;
-        $revue->description = $request->description;
-        $revue->save();
+        $data = new Revue();
+        $data->auteurs = serialize($request->autreAuteur) ;
+        $data->titre=$request->titre;
+        $data->volume=$request->volume;
+        $data->idAuteur=$request->auteurPrincipal;
+        $data->issue=$request->issue;
+        $data->nbrePage=$request->nbrPage;
+        $data->idDiscipline=$request->discipline;
+        $data->description=$request->description;
+        $data->fichier=$request->fichier;
+        $data->save();
         return redirect()->route('revue.index');
     }
 
@@ -65,9 +68,15 @@ class RevueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Revue $revue)
     {
-        //
+        $all = Revue::all();
+        return view('article.viewarticle',[
+            'revue'=>$revue,
+            'all'=>$all,
+
+
+        ]);
     }
 
     /**
@@ -86,7 +95,14 @@ class RevueController extends Controller
             'auteur'=>$auteur
         ]);
     }
-
+    public function article(){
+        $revue = Revue::all();
+        $auteur = Auteur::all();
+        return view('article.article',[
+            'revue'=>$revue,
+            'auteur'=>$auteur
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -96,14 +112,19 @@ class RevueController extends Controller
      */
     public function update(Request $request, Revue $revue)
     {
+        $fichier=$request->fichier;
+        $filename=$fichier->getClientOriginalName();
+        $request->fichier->move('back/fichier',$filename);
+        $revue->fichier=$filename;
         $revue->titre = $request->titre;
         $revue->volume = $request->volume;
         $revue->issue = $request->issue;
         $revue->nbrPage = $request->nbrPage;
-        $revue->discipline = $request->discipline;
-        $revue->auteurPrincipal = $request->auteurPrincipal;
-        $revue->autreAuteurs = $request->autreAuteurs;
+        $revue->idDiscipline = $request->discipline;
+        $revue->idAuteur = $request->auteurPrincipal;
         $revue->description = $request->description;
+
+        $revue['auteurs'] = json_encode($request->autreAuteurs);
         $revue->save();
         return redirect()->route('revue.index');
     }

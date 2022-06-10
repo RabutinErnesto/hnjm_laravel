@@ -10,8 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="back/img/favicon.png" rel="icon">
-  <link href="back/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{ asset('front/img/logo.png') }}" rel="icon">
+  <link href="{{ asset('front/img/logo.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -87,13 +87,6 @@
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
-                    </div>
-                    <div class="col-12">
-                        @if (Route::has('password.request'))
-                        <p class="small mb-0">Mot de passe
-                            <a class="btn btn-link" href="{{route('password.request')}}">Oublier</a></p>
-                        @endif
-
                     </div>
 
                   </form>
