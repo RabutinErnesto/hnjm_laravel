@@ -23,7 +23,7 @@
                   <select name="titre" id="titre" class="form-control form-select">
                       <option value="">choisir ...</option>
                       @foreach ($titre as $item)
-                      <option value="{{$item->abr}}">{{$item->abr}}</option>
+                      <option value="{{$item->id}}">{{$item->abr}}</option>
                       @endforeach
 
                   </select>
@@ -66,7 +66,7 @@
                   <select name="specialite" id="specialite" class="form-control form-select">
                       <option value="">choisir</option>
                       @foreach ($specialite as $item)
-                      <option value="{{$item->specialite}}">{{$item->specialite}}</option>
+                      <option value="{{$item->id}}">{{$item->specialite}}</option>
                       @endforeach
                   </select>
                   </div>

@@ -9,6 +9,7 @@ use App\Auteur;
 use App\Discipline;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RevueController extends Controller
 {
@@ -48,16 +49,20 @@ class RevueController extends Controller
      */
     public function store(Request $request)
     {
+        $fichier=$request->fichier;
+        $filename=$fichier->getClientOriginalName();
+        $request->fichier->move('back/fichier',$filename);
         $data = new Revue();
-        $data->auteurs = serialize($request->autreAuteur) ;
+        $data->auteur_id = implode(',', $request->autreAuteur) ;
         $data->titre=$request->titre;
         $data->volume=$request->volume;
-        $data->idAuteur=$request->auteurPrincipal;
+        $data->principalauteur_id=$request->auteurPrincipal;
         $data->issue=$request->issue;
-        $data->nbrePage=$request->nbrPage;
-        $data->idDiscipline=$request->discipline;
+        $data->nbrPage=$request->nbrPage;
+        $data->discipline_id=$request->discipline;
         $data->description=$request->description;
-        $data->fichier=$request->fichier;
+        $data->fichier=$filename;
+        $data->userInserted = Auth::user()->id;
         $data->save();
         return redirect()->route('revue.index');
     }
@@ -70,12 +75,11 @@ class RevueController extends Controller
      */
     public function show(Revue $revue)
     {
+
         $all = Revue::all();
         return view('article.viewarticle',[
             'revue'=>$revue,
             'all'=>$all,
-
-
         ]);
     }
 
@@ -92,15 +96,21 @@ class RevueController extends Controller
         return view('revue.update',[
             'revue'=>$revue,
             'discipline'=>$discipline,
-            'auteur'=>$auteur
+            'auteur'=>$auteur,
         ]);
     }
     public function article(){
-        $revue = Revue::all();
+        $re = Revue::all();
         $auteur = Auteur::all();
+        $revue= DB::table('revues')->where('auteur_id', '=',)
+        ->join('auteurs','auteurs.id','=','revues.auteur_id')
+        ->select('revues.auteur_id')
+        ->get();
         return view('article.article',[
-            'revue'=>$revue,
-            'auteur'=>$auteur
+            're'=>$re,
+            'auteur'=>$auteur,
+            'revue'=>$revue
+
         ]);
     }
     /**
@@ -112,19 +122,14 @@ class RevueController extends Controller
      */
     public function update(Request $request, Revue $revue)
     {
-        $fichier=$request->fichier;
-        $filename=$fichier->getClientOriginalName();
-        $request->fichier->move('back/fichier',$filename);
-        $revue->fichier=$filename;
-        $revue->titre = $request->titre;
-        $revue->volume = $request->volume;
-        $revue->issue = $request->issue;
-        $revue->nbrPage = $request->nbrPage;
-        $revue->idDiscipline = $request->discipline;
-        $revue->idAuteur = $request->auteurPrincipal;
-        $revue->description = $request->description;
-
-        $revue['auteurs'] = json_encode($request->autreAuteurs);
+        $revue->auteur_id = implode(' , ', $request->autreAuteur) ;
+        $revue->titre=$request->titre;
+        $revue->volume=$request->volume;
+        $revue->principalauteur_id=$request->auteurPrincipal;
+        $revue->issue=$request->issue;
+        $revue->nbrPage=$request->nbrPage;
+        $revue->discipline_id=$request->discipline;
+        $revue->description=$request->description;
         $revue->save();
         return redirect()->route('revue.index');
     }

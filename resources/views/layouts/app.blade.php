@@ -93,7 +93,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-                <span>{{ Auth::user()->titre }}</span>
+                <span>{{ implode(Auth::user()->titre()->get()->pluck('abr')->toArray()) }}</span>
               <h6>{{ Auth::user()->nom }} {{ Auth::user()->prenom }}</h6>
 
             </li>
@@ -223,6 +223,12 @@
         <a class="nav-link collapsed" href="{{route('auteur.index')}}">
           <i class="bi bi-people"></i>
           <span>Auteurs</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('photo.index')}}">
+          <i class="bi bi-camera"></i>
+          <span>Photo</span>
         </a>
       </li>
 

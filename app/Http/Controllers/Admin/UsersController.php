@@ -8,6 +8,7 @@ use App\Titre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -48,21 +49,15 @@ class UsersController extends Controller
     public function store(Request $request, User $user)
     {
         $user = new User;
-        $images=$request->images;
-        $filename=$images->getClientOriginalName();
-        $request->images->move('back/photo_user',$filename);
-
-        $user->images=$filename;
-        $user->titre = $request->titre;
-        $user->specialite = $request->specialite;
+        $user->titre_id = $request->titre;
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;
         $user->matricule = $request->matricule;
         $user->tel = $request->tel;
-        $user->titre = $request->titre;
-        $user->specialite = $request->specialite;
+        $user->specialite_id = $request->specialite;
         $user->email = $request->email;
-        $user->password =hash::make($request->password) ;
+        $user->password =hash::make($request->password);
+        $user->userCreated = Auth::user()->id;
         $user->save();
         return redirect()->route('users.index');
     }
@@ -101,24 +96,21 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function modification_pass(Request $request, User $user){
+
+    }
     public function update(Request $request, User $user)
     {
-        $images=$request->images;
-        $filename=$images->getClientOriginalName();
-        $request->images->move('back/photo_user',$filename);
-        if(!empty($images)){
-            $filename=$this->username.$this->uploadDir.$images->getClientOriginalName();
-        }
-
-        $user->images=$filename;
-        $user->titre = $request->titre;
-        $user->specialite = $request->specialite;
+        $request->validate([
+            'password' => ['required', 'min:4'],
+        ]);
+        $user->titre_id = $request->titre;
+        $user->specialite_id = $request->specialite;
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;
         $user->matricule = $request->matricule;
         $user->tel = $request->tel;
-        $user->titre = $request->titre;
-        $user->specialite = $request->specialite;
+        $user->password = hash::make($request->password);
         $user->email = $request->email;
         $user->save();
         return redirect()->route('users.index');

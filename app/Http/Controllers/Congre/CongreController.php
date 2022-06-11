@@ -6,6 +6,7 @@ use App\Auteur;
 use App\Congres;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CongreController extends Controller
 {
@@ -58,9 +59,11 @@ class CongreController extends Controller
     {
         $congre = new Congres();
         $congre->titre = $request->titre;
-        $congre->auteur = $request->auteur;
+        $congre->auteur_id = $request->auteur;
         $congre->date_congre = $request->date;
         $congre->contenue =$request->contenue;
+        $congre->fichier = $request->fichier;
+        $congre->userInserted = Auth::user()->id;
         $congre->save();
         return redirect()->route('congre.index');
     }
@@ -105,8 +108,9 @@ class CongreController extends Controller
     public function update(Request $request, Congres $congre)
     {
         $congre->titre = $request->titre;
-        $congre->auteur = $request->auteur;
+        $congre->auteur_id = $request->auteur;
         $congre->contenue =$request->contenue;
+        $congre->fichier = $request->fichier;
         $congre->save();
         return redirect()->route('congre.index');
     }

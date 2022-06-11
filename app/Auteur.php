@@ -11,4 +11,10 @@ class Auteur extends Model
     public function revues(){
         $this->hasMany('App\Revue');
     }
+    public function titre(){
+        return $this->belongsTo('App\Titre');
+    }
+    public function specialite(){
+        return $this->belongsTo('APP\Specialite');
+    }
 }

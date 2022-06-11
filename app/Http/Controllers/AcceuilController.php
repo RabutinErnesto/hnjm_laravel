@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Auteur;
 use App\Revue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,11 +29,10 @@ class AcceuilController extends Controller
         return view('comite');
     }
     public function archive(){
-        $auteur = DB::table('auteurs')
-        ->join('revues', 'auteurs.id', '=','revues.auteurs')
-        ->select('auteurs.*','revues.auteurs')->get();
+        $time = DB::table('revues')->where('created_at')->get();
+        $auteur = Auteur::all();
         $revue = Revue::orderBy('id','DESC')->get();
-        return view('archive',['revue'=>$revue,'auteur'=>$auteur]);
+        return view('archive',['revue'=>$revue,'auteur'=>$auteur,'time'=>$time]);
     }
     /**
      * Show the form for creating a new resource.

@@ -31,8 +31,8 @@
                         <tbody>
                             @foreach ($auteur as $item)
                             <tr>
-                              <td>{{ $item->titre}}  {{$item->nom}} {{$item->prenom}}</td>
-                              <td>{{$item->idSpecialite}}</td>
+                              <td>{{implode($item->titre()->get()->pluck('abr')->toArray())}}  {{$item->nom}} {{$item->prenom}}</td>
+                              <td>{{implode($item->specialite()->get()->pluck('specialite')->toArray())}}</td>
                               <td><a href="{{route('auteur.edit', $item->id)}}" class="btn btn-success">
                                   <i class="bi bi-pen"></i>
                               </a>

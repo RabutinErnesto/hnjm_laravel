@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Actualite;
 use App\Actualite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class ActualiteController extends Controller
 {
     /**
@@ -48,6 +48,7 @@ class ActualiteController extends Controller
         $actualite = new Actualite();
         $actualite->titre=$request->titre;
         $actualite->description=$request->description;
+        $actualite->userCreated = Auth::user()->id;
         $actualite->save();
         return redirect()->route('actualite.index');
     }

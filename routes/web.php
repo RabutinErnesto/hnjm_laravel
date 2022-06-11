@@ -81,3 +81,5 @@ Route::get('/viewthese','These\TheseController@viewthese')->name('viewthese');
 Route::namespace('Photo')->group(function(){
     Route::resource('photo','PhotoController');
 });
+Route::get('/modification_pass','UsersController@modification_pass')->name('modification_pass');
+Route::get('/viewphoto','Photo\PhotoController@photo')->name('viewphoto');
