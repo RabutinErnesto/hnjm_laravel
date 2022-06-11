@@ -7,7 +7,6 @@
                 ARCHIVES
           </h1>
         </div>
-        @foreach ($time as $t)
         <div class="row row-cards row-deck">
             <div class="col-lg-12">
 
@@ -18,7 +17,7 @@
 
                           <h5 class="mb-0">
                             <span class="btn btn-link" id="but" onclick="afficherMasquer()"  href="#collapse1" >
-
+                         {!! date('Y', strtotime($time)) !!}              ( {{ $revue->count() }} )
                              </span>
                           </h5>
 
@@ -50,7 +49,7 @@
             </div>
 
         </div>
-        @endforeach
+
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

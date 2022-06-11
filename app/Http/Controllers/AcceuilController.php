@@ -7,6 +7,7 @@ use App\Auteur;
 use App\Revue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AcceuilController extends Controller
 {
@@ -29,7 +30,7 @@ class AcceuilController extends Controller
         return view('comite');
     }
     public function archive(){
-        $time = DB::table('revues')->where('created_at')->get();
+        $time = Revue::all();
         $auteur = Auteur::all();
         $revue = Revue::orderBy('id','DESC')->get();
         return view('archive',['revue'=>$revue,'auteur'=>$auteur,'time'=>$time]);

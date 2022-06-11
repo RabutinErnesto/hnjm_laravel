@@ -122,7 +122,7 @@ class RevueController extends Controller
      */
     public function update(Request $request, Revue $revue)
     {
-        $revue->auteur_id = implode(' , ', $request->autreAuteur) ;
+       
         $revue->titre=$request->titre;
         $revue->volume=$request->volume;
         $revue->principalauteur_id=$request->auteurPrincipal;
