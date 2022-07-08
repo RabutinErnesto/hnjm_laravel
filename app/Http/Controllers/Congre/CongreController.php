@@ -64,6 +64,14 @@ class CongreController extends Controller
         $congre->contenue =$request->contenue;
         $congre->fichier = $request->fichier;
         $congre->userInserted = Auth::user()->id;
+        if ($request->hasFile('fichier')){
+            $fichier=$request->fichier;
+            $filename=$fichier->getClientOriginalName();
+            $request->fichier->move('back/fichier',$filename);
+            $congre->fichier=$filename;
+        }else{
+            $congre->fichier = $request->fichier;
+        }
         $congre->save();
         return redirect()->route('congre.index');
     }
@@ -111,6 +119,14 @@ class CongreController extends Controller
         $congre->auteur_id = $request->auteur;
         $congre->contenue =$request->contenue;
         $congre->fichier = $request->fichier;
+        if ($request->hasFile('fichier')){
+            $fichier=$request->fichier;
+            $filename=$fichier->getClientOriginalName();
+            $request->fichier->move('back/fichier',$filename);
+            $congre->fichier=$filename;
+        }else{
+            $congre->fichier = $request->fichier;
+        }
         $congre->save();
         return redirect()->route('congre.index');
     }

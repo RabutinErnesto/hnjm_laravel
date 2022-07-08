@@ -10,6 +10,8 @@ use App\Discipline;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class RevueController extends Controller
 {
@@ -49,19 +51,25 @@ class RevueController extends Controller
      */
     public function store(Request $request)
     {
-        $fichier=$request->fichier;
-        $filename=$fichier->getClientOriginalName();
-        $request->fichier->move('back/fichier',$filename);
+
+
         $data = new Revue();
-        $data->auteur_id = implode(',', $request->autreAuteur) ;
+        $data->autresauteur_id = implode(',', $request->autreAuteur) ;
         $data->titre=$request->titre;
         $data->volume=$request->volume;
-        $data->principalauteur_id=$request->auteurPrincipal;
+        $data->auteur_id=$request->auteurPrincipal;
         $data->issue=$request->issue;
         $data->nbrPage=$request->nbrPage;
         $data->discipline_id=$request->discipline;
         $data->description=$request->description;
-        $data->fichier=$filename;
+        if ($request->hasFile('fichier')){
+            $fichier=$request->fichier;
+            $filename=$fichier->getClientOriginalName();
+            $request->fichier->move('back/fichier',$filename);
+            $data->fichier=$filename;
+        }else{
+            $data->fichier = $request->fichier;
+        }
         $data->userInserted = Auth::user()->id;
         $data->save();
         return redirect()->route('revue.index');
@@ -100,16 +108,12 @@ class RevueController extends Controller
         ]);
     }
     public function article(){
-        $re = Revue::all();
+        $re = Revue::paginate(4);
         $auteur = Auteur::all();
-        $revue= DB::table('revues')->where('auteur_id', '=',)
-        ->join('auteurs','auteurs.id','=','revues.auteur_id')
-        ->select('revues.auteur_id')
-        ->get();
+
         return view('article.article',[
             're'=>$re,
             'auteur'=>$auteur,
-            'revue'=>$revue
 
         ]);
     }
@@ -122,10 +126,17 @@ class RevueController extends Controller
      */
     public function update(Request $request, Revue $revue)
     {
-       
+        if ($request->hasFile('fichier')){
+            $fichier=$request->fichier;
+            $filename=$fichier->getClientOriginalName();
+            $request->fichier->move('back/fichier',$filename);
+            $revue->fichier=$filename;
+        }else{
+            $revue->fichier = $request->fichier;
+        }
         $revue->titre=$request->titre;
         $revue->volume=$request->volume;
-        $revue->principalauteur_id=$request->auteurPrincipal;
+        $revue->auteur_id=$request->auteurPrincipal;
         $revue->issue=$request->issue;
         $revue->nbrPage=$request->nbrPage;
         $revue->discipline_id=$request->discipline;

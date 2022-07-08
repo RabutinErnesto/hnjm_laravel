@@ -427,7 +427,7 @@
 
 .testimonial-carousel .owl-item.center .testimonial-item img {
     background: var(--primary) !important;
-} 
+}
 
 .testimonial-carousel .owl-nav {
     position: absolute;
@@ -491,7 +491,7 @@
 }
 
 .footer .btn.btn-link::before {
-    position: relative;
+    position: absolute;
     content: "\f105";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -517,3 +517,4 @@
 .footer .copyright a:hover {
     color: var(--primary);
 }
+

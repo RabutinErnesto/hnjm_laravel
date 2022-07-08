@@ -1,22 +1,33 @@
 @extends('layouts.front')
 @section('content')
- <!-- Start -->
- <div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <p class="d-inline-block border rounded-pill py-1 px-4">Actualite</p>
-        </div>
-        <div class="row g-4">
+<div class="my-3 my-md-5">
+	<div class="container">
+		<div class="page-header">
+		  <h1 class="page-title">
+			Resume Congre
+		  </h1>
+		</div>
+
+		<div class="row row-cards row-deck" >
             @foreach ($actualite as $item)
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item bg-light rounded h-100 p-5">
-                    <h4 class="mb-3"> {{ $item->titre }}</h4>
-                    <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
-                </div>
+            <div class="col-lg-6" style="padding: 2%">
+                  <div class="card card-aside">
+                    <a href="#" class="card-aside-column"></a>
+                    <div class="card-body d-flex flex-column">
+                          <h4><a href="{{ route('actualite.show', $item) }}">{{ $item->titre }}</a></h4>
+                          <div class="d-flex align-items-center pt-5 mt-auto">
+                            <div>
+                                <p  class="text-default" name="a"> {!! $item->description !!} </p>
+                            </div>
+
+                          </div>
+                    </div>
+                  </div>
             </div>
             @endforeach
-        </div>
-    </div>
 </div>
-<!-- End -->
+
+
+	</div>
+</div>
 @endsection

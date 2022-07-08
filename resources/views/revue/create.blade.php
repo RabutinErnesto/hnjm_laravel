@@ -31,7 +31,7 @@
 
                   <div class="col-12">
                     <label  class="form-label">Issue</label>
-                    <input type="text" name="issue" class="form-control" id="issue" >
+                    <input type="text" name="issue" class="form-control" id="issue" required>
                     <div class="invalid-feedback">Tapez le issue!</div>
                   </div>
 

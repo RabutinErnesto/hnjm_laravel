@@ -53,10 +53,9 @@
                   <div class="col-12">
                     <label for="auteur" class="form-label">Auteur Principal</label>
                   <select name="auteurPrincipal" id="auteur" class="form-control form-select" >
-
-                      <option value="{{$revue->princilauteur_id}}">{{ implode($revue->auteur()->get()->pluck('nom')->toArray()) }} {{ implode($revue->auteur()->get()->pluck('prenom')->toArray()) }}</option>
+                      <option value="{{$revue->auteur_id}}">{{ implode($revue->auteur()->get()->pluck('nom')->toArray()) }} {{ implode($revue->auteur()->get()->pluck('prenom')->toArray()) }}</option>
                       @foreach ($auteur as $item)
-                      <option value="{{$item->nom}} {{$item->prenom}}">{{$item->nom}} {{$item->prenom}}</option>
+                      <option value="{{$item->id}}">{{$item->nom}} {{$item->prenom}}</option>
                       @endforeach
                   </select>
                   </div>
@@ -64,7 +63,7 @@
                   <div class="col-12">
                     <label for="AutreAuteur" class="form-label">Autre Auteurs</label>
                   <select name="autreAuteurs" id="autre-auteur" id="multiple" class="form-control select2" multiple>
-                      <option value="{{$revue->auteur_id}}">{{ implode($revue->auteur()->get()->pluck('nom')->toArray()) }} {{ implode($revue->auteur()->get()->pluck('prenom')->toArray()) }}</option>
+                      <option value="{{$revue->autresauteur_id}}">{{ implode($revue->auteur()->get()->pluck('nom')->toArray()) }} {{ implode($revue->auteur()->get()->pluck('prenom')->toArray()) }}</option>
                       @foreach ($auteur as $item)
                       <option value="{{$item->id}} ">{{$item->nom}} {{$item->prenom}}</option>
                       @endforeach
@@ -95,7 +94,6 @@
           </div>
 
 
-
         </div>
       </div>
     </section>
@@ -104,16 +102,16 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
   <script type="text/javascript">
-   $(document).ready(function() {
-        // Select2 Multiple
-        $('.select2').select2({
-            placeholder: "Select Auteurs",
-            allowClear: true
-        });
+    $(document).ready(function() {
+         // Select2 Multiple
+         $('.select2').select2({
+             allowClear: true
+         });
+     });
 
-    });
-  </script>
+   </script>
 @endsection
 
 

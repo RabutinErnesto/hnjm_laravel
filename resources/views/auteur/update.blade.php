@@ -24,7 +24,7 @@
 
                       <option value="{{$auteur->titre_id}}">{{implode($auteur->titre()->get()->pluck('abr')->toArray())}}</option>
                       @foreach ($titre as $item)
-                      <option value="{{$item->abr}}">{{$item->abr}}</option>
+                      <option value="{{$item->id}}">{{$item->abr}}</option>
                       @endforeach
 
                   </select>
@@ -58,7 +58,7 @@
                   <select name="specialite" id="specialite" class="form-control form-select">
                       <option value="{{$auteur->specialite_id}}">{{implode(',', $auteur->specialite()->get()->pluck('abr')->toArray())}}</option>
                       @foreach ($specialite as $item)
-                      <option value="{{$item->abr}}">{{$item->abr}}</option>
+                      <option value="{{$item->id}}">{{$item->abr}}</option>
                       @endforeach
                   </select>
                   </div>

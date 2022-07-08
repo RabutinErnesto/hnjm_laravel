@@ -58,6 +58,14 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->password =hash::make($request->password);
         $user->userCreated = Auth::user()->id;
+        if ($request->hasFile('images')){
+            $fichier=$request->images;
+            $filename=$fichier->getClientOriginalName();
+            $request->images->move('back/photo_user',$filename);
+            $user->images=$filename;
+        }else{
+            $user->images = $request->images;
+        }
         $user->save();
         return redirect()->route('users.index');
     }
@@ -112,6 +120,14 @@ class UsersController extends Controller
         $user->tel = $request->tel;
         $user->password = hash::make($request->password);
         $user->email = $request->email;
+        if ($request->hasFile('images')){
+            $fichier=$request->images;
+            $filename=$fichier->getClientOriginalName();
+            $request->images->move('back/photo_user',$filename);
+            $user->images=$filename;
+        }else{
+            $user->images = $request->images;
+        }
         $user->save();
         return redirect()->route('users.index');
     }
