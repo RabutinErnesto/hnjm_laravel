@@ -7,6 +7,7 @@ use App\Auteur;
 use App\Revue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AcceuilController extends Controller
 {
@@ -29,10 +30,35 @@ class AcceuilController extends Controller
         return view('comite');
     }
     public function archive(){
-        $time = DB::table('revues')->where('created_at')->get();
-        $auteur = Auteur::all();
-        $revue = Revue::orderBy('id','DESC')->get();
-        return view('archive',['revue'=>$revue,'auteur'=>$auteur,'time'=>$time]);
+        //$year = Revue::select('created_at')->first();
+       // $dt = Carbon::parse($year->created_at)->year;
+
+
+       $auteur = Auteur::select('id','nom','prenom')
+       ->select('nom','prenom')
+       ->get();
+
+       $revue = Revue::orderBy('id','DESC')->get();
+
+        $i = DB::table('revues')
+       ->select('issue')
+       ->groupBy('issue')
+       ->orderBy('issue','desc');
+
+
+       $data = Revue::
+       orderBy('issue','DESC')
+       ->get()
+       ->unique('id')
+       ->groupBy('issue');
+
+        return view('archive',[
+            'revue'=>$revue,
+            'auteur'=>$auteur,
+            'data' => $data,
+            //'dt' =>$dt,
+           'i' =>$i,
+        ]);
     }
     /**
      * Show the form for creating a new resource.

@@ -56,6 +56,14 @@ class TheseController extends Controller
         $these->discipline_id = $request->discipline;
         $these->auteur_id = $request->auteur;
         $these->userCreated = Auth::user()->id;
+        if ($request->hasFile('fichier')){
+            $fichier=$request->fichier;
+            $filename=$fichier->getClientOriginalName();
+            $request->fichier->move('back/these_fichier',$filename);
+            $these->fichier=$filename;
+        }else{
+            $these->fichier = $request->fichier;
+        }
         $these->save();
         return redirect()->route('these.index');
     }
@@ -97,13 +105,17 @@ class TheseController extends Controller
      */
     public function update(Request $request, These_et_Memoire $these)
     {
-        $fichier=$request->fichier;
-        $filename=$fichier->getClientOriginalName();
-        $request->fichier->move('back/these_fichier',$filename);
-        $these->fichier=$filename;
         $these->titre = $request->titre;
         $these->discipline = $request->discipline;
         $these->auteur = $request->auteur;
+        if ($request->hasFile('fichier')){
+            $fichier=$request->fichier;
+            $filename=$fichier->getClientOriginalName();
+            $request->fichier->move('back/these_fichier',$filename);
+            $these->fichier=$filename;
+        }else{
+            $these->fichier = $request->fichier;
+        }
         $these->save();
         return redirect()->route('these.index');
     }

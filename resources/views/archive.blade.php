@@ -7,58 +7,49 @@
                 ARCHIVES
           </h1>
         </div>
-        @foreach ($time as $t)
+        @foreach($data as $item => $i)
         <div class="row row-cards row-deck">
-            <div class="col-lg-12">
-
-                <div id="accordion">
-                    <div class="card">
-
-                        <div class="card-header" id="heading1">
-
-                          <h5 class="mb-0">
-                            <span class="btn btn-link" id="but" onclick="afficherMasquer()"  href="#collapse1" >
-
-                             </span>
-                          </h5>
-
-                        </div>
-
-                        <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordion" style="display: none">
-                          <div class="card-body">
-                              <table class="table">
-                                  <thead class="thead-light">
-                                    <tr>
-                                      <th scope="col">NOM DU 1ER AUTEUR</th>
-                                      <th scope="col">TITRE</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    @foreach ($revue as $item)
-                                    <tr>
-                                        <th scope="row">{{implode(',',$item->auteur()->get()->pluck('nom')->toArray())}}  {{implode(',',$item->auteur()->get()->pluck('prenom')->toArray())}}</th>
-                                        <td><a href="{{ route('revue.show',$item) }}">{{ $item->titre }}</a></td>
-                                      </tr>
-                                    @endforeach
-                                   </tbody>
-                              </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            <div class="card-header btn-light"  href="#collapse">
+                <a class="btn" data-toggle="collapse" href="#{{ $item }}" role="button" aria-expanded="false" aria-controls="{{ $item }}">
+                   <h5 class="mb-0">
+                            <span >
+                                {{ $item }} ({{ $i->count() }})
+                            </span>
+                          </h5></a>
 
             </div>
-
-        </div>
+                <div  class="collapse" id="{{ $item }}">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead class="thead-light">
+                              <tr>
+                                <th scope="col">NOM DU 1ER AUTEUR</th>
+                                <th scope="col">TITRE</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($i as $rev)
+                              <tr>
+                                  <th scope="row">{{ implode($rev->auteur()->get()->pluck('nom')->toArray()) }} {{ implode($rev->auteur()->get()->pluck('prenom')->toArray()) }}</th>
+                                  <td><a href="">{{ $rev->titre }}</a></td>
+                                </tr>
+                                @endforeach
+                             </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div> <br>
         @endforeach
+
+
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script>
 $(document).ready(function(){
-  $("#but").click(function(){
-    $("#collapse1").toggle();
+  $(".visible").click(function(){
+    $(".collapse").toggle("slide");
   });
 });
-</script>
+</script>--}}
 @endsection

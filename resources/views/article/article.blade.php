@@ -32,6 +32,7 @@
                   </div>
             </div>
             @endforeach
+            {{ $re->links() }}
         </div>
 
 

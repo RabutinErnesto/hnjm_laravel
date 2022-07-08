@@ -51,14 +51,22 @@ class AuteurController extends Controller
     public function store(Request $request, Auteur $auteur)
     {
         $auteur = new auteur;
-        $auteur->titre_id = $request->titre;
+        $auteur->titre_id= $request->titre;
         $auteur->nom = $request->nom;
         $auteur->prenom = $request->prenom;
         $auteur->phone = $request->tel;
-        $auteur->specialite_id = $request->specialite;
+        $auteur->specialite_id= $request->specialite;
         $auteur->email = $request->email;
-        $auteur->photo = $request->images;
+
         $auteur->userCreated = Auth::user()->id;
+        if ($request->hasFile('images')){
+            $fichier=$request->images;
+            $filename=$fichier->getClientOriginalName();
+            $request->images->move('back/photo_auteur',$filename);
+            $auteur->photo=$filename;
+        }else{
+            $auteur->photo = $request->images;
+        }
         $auteur->save();
         return redirect()->route('auteur.index');
     }
@@ -101,12 +109,20 @@ class AuteurController extends Controller
     public function update(Request $request, Auteur $auteur)
     {
 
-        $auteur->idTitre = $request->titre;
+        $auteur->titre_id = $request->titre;
         $auteur->nom = $request->nom;
         $auteur->prenom = $request->prenom;
         $auteur->phone = $request->tel;
-        $auteur->idSpecialite = $request->specialite;
+        $auteur->specialite_id = $request->specialite;
         $auteur->email = $request->email;
+        if ($request->hasFile('images')){
+            $fichier=$request->images;
+            $filename=$fichier->getClientOriginalName();
+            $request->images->move('back/photo_auteur',$filename);
+            $auteur->photo=$filename;
+        }else{
+            $auteur->photo = $request->images;
+        }
         $auteur->save();
         return redirect()->route('auteur.index');
     }

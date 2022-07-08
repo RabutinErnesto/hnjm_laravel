@@ -7,9 +7,10 @@
             @foreach ($photo as $item)
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item bg-light rounded h-100 p-5">
-                    <h4 class="mb-3"> {{ $item->photo }}</h4>
-                    <h6>{{ $item->commentaire}}</h6>
-                    <a class="btn" href="{{ route('photo.show', $item) }}"><i class="fa fa-plus text-primary me-3"></i>Read More</a>
+                    <img src="../back/photos/{{ $item->photo }}" alt="" class="img-fluid">
+                    <br> <br>
+                    <span>{{ $item->commentaire }}</span>
+                   <!-- <a class="btn" href="{{ route('photo.show', $item) }}"><i class="fa fa-plus text-primary me-3"></i>Read More</a> -->
                 </div>
             </div>
             @endforeach

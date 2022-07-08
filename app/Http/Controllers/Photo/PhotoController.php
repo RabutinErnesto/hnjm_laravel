@@ -46,11 +46,19 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['
-        photo'=>'required|image|mimes:png,jpg']);
+
         $photo = new Photo();
         $photo->commentaire = $request->commentaire;
         $photo->auteur_id = $request->auteur;
+        if ($request->hasFile('photo')){
+            $fichier=$request->photo;
+            $filename=$fichier->getClientOriginalName();
+            $request->photo->move('back/photos',$filename);
+            $photo->photo=$filename;
+        }else{
+            $photo->photo = $request->photo;
+        }
+
         $photo->save();
         return redirect()->route('photo.index');
     }
@@ -61,9 +69,10 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Photo $photo)
     {
-        //
+        $ph = Photo::all();
+        return view('photo.show', ['ph'=>$ph]);
     }
 
     /**
@@ -84,9 +93,16 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Photo $photo)
     {
-        //
+        if ($request->hasFile('photo')){
+            $fichier=$request->photo;
+            $filename=$fichier->getClientOriginalName();
+            $request->photo->move('back/photos',$filename);
+            $photo->photo=$filename;
+        }else{
+            $photo->photo = $request->photo;
+        }
     }
 
     /**
@@ -95,8 +111,9 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Photo $photo)
     {
-        //
+        $photo->delete();
+        return redirect()->route('photo.index');
     }
 }

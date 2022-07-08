@@ -47,14 +47,14 @@
                 <div class="col-12">
                   <label for="matricule" class="form-label">Matricule</label>
                   <div class="input-group has-validation">
-                    <input type="text" name="matricule" class="form-control" id="matricule" required>
+                    <input type="text" name="matricule" class="form-control" id="matricule" >
                     <div class="invalid-feedback">Entrez votre matricule .</div>
                   </div>
                 </div>
                 <div class="col-12">
                     <label for="tel" class="form-label">Telephone</label>
                     <div class="input-group has-validation">
-                      <input type="text" name="tel" class="form-control" id="tel" required>
+                      <input type="text" name="tel" class="form-control" id="tel" >
                       <div class="invalid-feedback">Entrez votre tel .</div>
                     </div>
                   </div>

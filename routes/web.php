@@ -71,6 +71,10 @@ Route::namespace('Congre')->group(function()
 {
     Route::resource('congre', 'CongreController');
 });
+Route ::namespace('Photo')->group(function(){
+    Route::resource('photo','PhotoController');
+});
+
 Route::get('/programcongre','Congre\CongreController@programcongre')->name('programcongre');
 Route::get('/resumecongre','Congre\CongreController@resumecongre')->name('resumecongre');
 Route::get('/instr','AcceuilController@instr')->name('instr');
@@ -78,8 +82,6 @@ Route::get('/archive','AcceuilController@archive')->name('archive');
 Route::get('/articleview','Revue\RevueController@article')->name('articleview');
 Route::get('/comite','AcceuilController@comite')->name('comite');
 Route::get('/viewthese','These\TheseController@viewthese')->name('viewthese');
-Route::namespace('Photo')->group(function(){
-    Route::resource('photo','PhotoController');
-});
+
 Route::get('/modification_pass','UsersController@modification_pass')->name('modification_pass');
 Route::get('/viewphoto','Photo\PhotoController@photo')->name('viewphoto');
