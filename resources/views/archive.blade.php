@@ -7,13 +7,13 @@
                 ARCHIVES
           </h1>
         </div>
-        @foreach($data as $item => $i)
+        @foreach($data as $item => $collapse)
         <div class="row row-cards row-deck">
             <div class="card-header btn-light"  href="#collapse">
                 <a class="btn" data-toggle="collapse" href="#{{ $item }}" role="button" aria-expanded="false" aria-controls="{{ $item }}">
                    <h5 class="mb-0">
                             <span >
-                                {{ $item }} ({{ $i->count() }})
+                                {{ $item }} ({{ $collapse->count() }})
                             </span>
                           </h5></a>
 
@@ -28,10 +28,10 @@
                               </tr>
                             </thead>
                             <tbody>
-                                @foreach ($i as $rev)
+                                @foreach ($collapse as $rev)
                               <tr>
                                   <th scope="row">{{ implode($rev->auteur()->get()->pluck('nom')->toArray()) }} {{ implode($rev->auteur()->get()->pluck('prenom')->toArray()) }}</th>
-                                  <td><a href="">{{ $rev->titre }}</a></td>
+                                  <td><a href="{{ route('revue.show', $rev) }}">{{ $rev->titre }}</a></td>
                                 </tr>
                                 @endforeach
                              </tbody>

@@ -37,27 +37,18 @@ class AcceuilController extends Controller
        $auteur = Auteur::select('id','nom','prenom')
        ->select('nom','prenom')
        ->get();
-
-       $revue = Revue::orderBy('id','DESC')->get();
-
-        $i = DB::table('revues')
-       ->select('issue')
-       ->groupBy('issue')
-       ->orderBy('issue','desc');
-
-
+       
        $data = Revue::
-       orderBy('issue','DESC')
+       orderBy('id','DESC')
        ->get()
        ->unique('id')
        ->groupBy('issue');
 
         return view('archive',[
-            'revue'=>$revue,
             'auteur'=>$auteur,
             'data' => $data,
             //'dt' =>$dt,
-           'i' =>$i,
+
         ]);
     }
     /**

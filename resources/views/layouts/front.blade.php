@@ -118,18 +118,13 @@
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed By <a class="border-bottom" href="">ErnestoRabutin</a>
+                    Designed By <a class="border-bottom" href="https://www.facebook.com/ernestorabutin" target="blank">ErnestoRabutin</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Footer End -->
-
-
-
-
-
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
