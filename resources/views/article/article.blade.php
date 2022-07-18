@@ -11,7 +11,7 @@
 
 
 		<div class="row row-cards row-deck" >
-            @foreach ($re as $item)
+            @foreach ($re as $item )
             <div class="col-lg-6" style="padding: 2%">
                   <div class="card card-aside">
                     <a href=""  class="card-aside-column" style="background-image: url('')"></a>
@@ -20,9 +20,9 @@
 
                         <div class="d-flex align-items-center pt-5 mt-auto">
                             <div>
-
-                                <a href="#"  class="text-default" name="a">{{ implode($item->auteur()->get()->pluck('nom')->toArray()) }}  {{ implode($item->auteur()->get()->pluck('prenom')->toArray()) }}</a>
-
+                               
+                              
+                              <a href="#"  class="text-default" name="a">{{ implode(',', $item->auteur()->get()->pluck('nom')->toArray()) }} {{ implode(',', $item->auteur()->get()->pluck('prenom')->toArray()) }}</a>
                           </div>
                         </div>
 

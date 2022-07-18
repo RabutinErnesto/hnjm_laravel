@@ -54,10 +54,10 @@ class RevueController extends Controller
 
 
         $data = new Revue();
-        $data->autresauteur_id = implode(',', $request->autreAuteur) ;
+        $data->auteur_id = implode(',', $request->autreAuteur) ;
         $data->titre=$request->titre;
         $data->volume=$request->volume;
-        $data->auteur_id=$request->auteurPrincipal;
+        $data->idAuteur=$request->auteurPrincipal;
         $data->issue=$request->issue;
         $data->nbrPage=$request->nbrPage;
         $data->discipline_id=$request->discipline;
@@ -84,7 +84,7 @@ class RevueController extends Controller
     public function show(Revue $revue)
     {
 
-        $all = Revue::all();
+        $all = Revue::paginate('5');
         return view('article.viewarticle',[
             'revue'=>$revue,
             'all'=>$all,
@@ -109,12 +109,10 @@ class RevueController extends Controller
     }
     public function article(){
         $re = Revue::paginate(4);
-        $auteur = Auteur::all();
 
+       
         return view('article.article',[
             're'=>$re,
-            'auteur'=>$auteur,
-
         ]);
     }
     /**
@@ -136,7 +134,7 @@ class RevueController extends Controller
         }
         $revue->titre=$request->titre;
         $revue->volume=$request->volume;
-        $revue->auteur_id=$request->auteurPrincipal;
+        $revue->idAuteur=$request->auteurPrincipal;
         $revue->issue=$request->issue;
         $revue->nbrPage=$request->nbrPage;
         $revue->discipline_id=$request->discipline;

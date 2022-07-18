@@ -16,26 +16,23 @@
                 </div>
             </div>
             <div class="col-lg-3">
-                <a href="" class="btn btn-block btn-primary mb-12 col-12">
-                  <i class="fa fa-download mr-2">  Telecharger en pdf</i>
+                <a href=" ../back/fichier/{{ $revue->fichier}}" class="btn btn-block btn-primary mb-12 col-12">
+                  <i class="fa fa-download mr-2">  Télécharger en pdf</i>
                 </a>
 
-                <div class="list-group list-group-transparent mb-0 ">
-                    <br>
-                  <a href="#" class="list-group-item list-group-item-action active text-center"><i class="fa fa-flag mr-2 "> </i> Autres revues</a>
+                <div class="list-group list-group-transparent mb-2 mt-4 ">
+                  <a href="#" class="list-group-item list-group-item-action  text-center"><i class="fa fa-flag mr-2 "> </i> Autres revues</a>
                 </div>
                 <div class="list-group list-group-transparent mb-0">
                     @foreach ($all as $item)
-                    <a href="{{ route('revue.show', $item) }}" class="list-group-item list-group-item-action"><span style="font-size:10.0pt">{{ $item->titre }}</span>  </a>
+                    <a href="{{ route('revue.show', $item) }}" class="list-group-item list-group-item-action text-center"><span style="font-size:10.0pt">{{ $item->titre }}</span>  </a>
                     @endforeach
-
-
-
-                </div>
-
+                </div> 
+                <div class="mt-3"> <small>{{ $all->links() }}</small> </div>
+                
             </div>
         </div>
     </div>
 </div>
- <
+
 @endsection

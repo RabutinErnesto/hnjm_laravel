@@ -10,6 +10,7 @@ use App\Discipline;
 use App\Revue;
 use App\These_et_Memoire;
 
+
 class HomeController extends Controller
 {
     /**
@@ -41,7 +42,7 @@ class HomeController extends Controller
             'actualite'=>$actualite,
             'congre'=>$Congre,
             'article'=>$article,
-            'discipline'=>$discipline
+            'discipline'=>$discipline,
         ]);
     }
 
