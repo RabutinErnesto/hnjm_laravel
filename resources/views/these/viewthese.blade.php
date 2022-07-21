@@ -5,13 +5,29 @@
         @if ($these->isNotEmpty())
         <div class="row g-4">
             @foreach ($these as $item)
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item bg-light rounded h-100 p-5">
-                    <h4 class="mb-3"> {{ $item->titre }}</h4>
-                    <h6>{{ Implode($item->auteur()->get()->pluck('nom')->toArray()) }}</h6>
-                    <a class="btn" href="{{ route('these.show', $item) }}"><i class="fa fa-plus text-primary me-3"></i>Read More</a>
+                        <div class="row row-cards row-deck">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Auteur</th>
+                                    <th>These et memoire</th>
+                                    <th>Discipline</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <td>{{ Implode($item->auteur()->get()->pluck('nom')->toArray()) }}</td>
+                                    <td>{{ $item->titre }}</td>
+                                    <td>{{ Implode($item->discipline()->get()->pluck('discipline')->toArray()) }}</td>                                
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                    </div>
+
                 </div>
-            </div>
             @endforeach
         </div>
         @else
